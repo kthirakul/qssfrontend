@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect } from 'react'
+import styles from './app.module.css'
 import AppRoute from './app.route'
-
 function App() {
   const a = async () => await axios.get('http://localhost:3001/')
 
@@ -12,7 +12,7 @@ function App() {
     b()
   }, [])
   return (
-    <div className='App'>
+    <div className={styles['app']}>
       <AppRoute />
     </div>
   )

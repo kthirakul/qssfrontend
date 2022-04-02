@@ -1,5 +1,7 @@
-html body {
-  margin: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
   height: 100vh;
-  background: #f4f4f4;
 }
