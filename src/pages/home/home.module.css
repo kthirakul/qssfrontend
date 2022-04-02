@@ -1,10 +1,41 @@
-.btn {
-  @apply font-bold py-2 px-4 rounded;
+.w-logo {
+  @apply flex items-center p-6;
 }
 
-.btn-blue {
-  @apply bg-blue-500 text-white;
+.w-home {
+  @apply relative h-full overflow-hidden;
 }
-.btn-blue:hover {
-  @apply bg-blue-700;
+
+.w-wallpaper {
+  @apply mix-blend-darken absolute bottom-0 pointer-events-none;
+}
+
+.t-org {
+  margin-left: -32px;
+  @apply text-2xl font-semibold text-slate-800;
+}
+
+.btn-org {
+  @apply w-72 bg-indigo-600 text-white rounded-md text-left pl-4 py-3;
+}
+
+.btn-org:active {
+  @apply bg-indigo-700;
+}
+
+.w-emp {
+  width: 600px;
+  @apply bg-white rounded-3xl p-12 shadow-md flex flex-col gap-y-6;
+}
+
+.btn-login {
+  @apply bg-indigo-600 text-white flex justify-center py-4 rounded-xl;
+}
+
+.btn-login:active {
+  @apply bg-indigo-700;
+}
+
+.t-input {
+  @apply outline-none border-2 p-3 rounded-xl border-indigo-500;
 }
