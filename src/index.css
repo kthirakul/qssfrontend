@@ -5,3 +5,8 @@
 #root {
   height: 100vh;
 }
+
+@font-face {
+  font-family: Sarabun;
+  src: url('./assets/fonts/Sarabun-Regular.ttf');
+}

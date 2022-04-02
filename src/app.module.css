@@ -1,7 +1,4 @@
 body {
+  font-family: Sarabun !important;
   @apply bg-slate-200;
-}
-
-.app {
-  
 }
