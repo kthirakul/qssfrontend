@@ -1,10 +1,12 @@
 import { createContext, useContext } from 'react'
 import NumberService from './services/number.service'
+import RouteService from './services/route.service'
 
 const Context = createContext({})
 
 const services = () => ({
   number: NumberService(),
+  route: RouteService(),
 })
 
 const AppServices: React.FC = ({ children }) => {
@@ -21,5 +23,4 @@ const AppServices: React.FC = ({ children }) => {
 
 export default AppServices
 
-type ServicesType = ReturnType<typeof services>
-export const Services = () => useContext(Context) as ServicesType
+export const Services = () => useContext(Context) as ReturnType<typeof services>

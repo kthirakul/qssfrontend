@@ -1,14 +1,14 @@
 import { Services } from '../../app.services'
 
 const HomeUse = () => {
-  const { number } = Services()
+  const { number, route } = Services()
 
   // state
   // declare
   // function
   // execute
 
-  return { number }
+  return { number, route }
 }
 
 export default HomeUse
