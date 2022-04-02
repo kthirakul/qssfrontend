@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios'
+import { useEffect } from 'react'
+import AppRoute from './app.route'
 
 function App() {
+  const a = async () => await axios.get('http://localhost:3001/')
+
+  useEffect(() => {
+    const b = async () => {
+      console.log('App.js | await a()| = ', (await a()).data)
+    }
+    b()
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <AppRoute />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
