@@ -1,0 +1,21 @@
+.bar {
+  height: 44px;
+  background: white;
+  @apply shadow-md flex items-center justify-between px-4;
+}
+
+.content {
+  height: 100%;
+}
+
+.wrap {
+  height: calc(100vh - 76px);
+}
+
+.btn-logout {
+  @apply bg-orange-500 text-white flex items-center py-1 px-2 rounded-md gap-x-1;
+}
+
+.btn-logout:active {
+  @apply bg-orange-600;
+}

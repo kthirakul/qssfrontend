@@ -1,3 +1,8 @@
+import '@material/mwc-button'
+import '@material/mwc-circular-progress'
+import '@material/mwc-dialog'
+import '@material/mwc-icon'
+import '@material/mwc-snackbar'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
@@ -5,6 +10,18 @@ import App from './App'
 import Services from './app.services'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'mwc-circular-progress': any
+      'mwc-icon': any
+      'mwc-dialog': any
+      'mwc-button': any
+      'mwc-snackbar': any
+    }
+  }
+}
 
 ReactDOM.render(
   <React.StrictMode>
