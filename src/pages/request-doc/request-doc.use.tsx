@@ -73,21 +73,25 @@ const useRequestDoc = () => {
   }
 
   const changeStatus = (statusLog: string) => {
-    const status: StatusLog[] | undefined = services.docs.currentRequestDoc?.statusLog
-      .concat({
-        createdAt: Date.now(),
-        createdBy: services.user.currentUser?.name,
-        status: statusLog,
-      })
+    setbuttonLoading(true)
+    setTimeout(() => {
+      const status: StatusLog[] | undefined = services.docs.currentRequestDoc?.statusLog
+        .concat({
+          createdAt: Date.now(),
+          createdBy: services.user.currentUser?.name,
+          status: statusLog,
+        })
+        // @ts-ignore
+        .sort((a, b) => b.createdAt - a.createdAt)
+
       // @ts-ignore
-      .sort((a, b) => b.createdAt - a.createdAt)
+      const newData = { ...services.docs.currentRequestDoc }
+      newData.statusLog = status
 
-    // @ts-ignore
-    const newData = { ...services.docs.currentRequestDoc }
-    newData.statusLog = status
-
-    // @ts-ignore
-    services.docs.setCurrentRequestDoc(newData)
+      // @ts-ignore
+      services.docs.setCurrentRequestDoc(newData)
+      setbuttonLoading(false)
+    }, 1000)
   }
 
   const switchRoute = (email: string | undefined) => {

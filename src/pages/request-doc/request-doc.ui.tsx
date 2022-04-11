@@ -37,26 +37,26 @@ const RequestDoc: React.FC = () => {
           (res) => res.status === 'ไม่ผ่านการคัดกรอง' || res.status === 'คัดกรองคำขอตรวจสอบวุฒิแล้ว'
         ) ? (
           <div className='flex gap-x-4 absolute right-6 top-6'>
-            <button
-              onClick={() => hook.changeStatus(StatusLogData.assistantNoAppove)}
-              className=' p-4 bg-red-500 text-white rounded-md'
-            >
-              {hook.buttonLoading ? (
+            {hook.buttonLoading ? (
+              <div style={{ width: 100 }}>
                 <mwc-circular-progress Indeterminate></mwc-circular-progress>
-              ) : (
-                'ไม่อนุมัติ'
-              )}
-            </button>
-            <button
-              onClick={() => hook.changeStatus(StatusLogData.assistantAppove)}
-              className='  p-4 bg-blue-500 text-white rounded-md'
-            >
-              {hook.buttonLoading ? (
-                <mwc-circular-progress Indeterminate></mwc-circular-progress>
-              ) : (
-                'อนุมัติ'
-              )}
-            </button>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={() => hook.changeStatus(StatusLogData.assistantNoAppove)}
+                  className=' p-4 bg-red-500 text-white rounded-md'
+                >
+                  ไม่อนุมัติ
+                </button>
+                <button
+                  onClick={() => hook.changeStatus(StatusLogData.assistantAppove)}
+                  className='  p-4 bg-blue-500 text-white rounded-md'
+                >
+                  อนุมัติ
+                </button>
+              </>
+            )}
           </div>
         ) : null}
 
@@ -82,18 +82,26 @@ const RequestDoc: React.FC = () => {
             res.status === 'ไม่อนุมัติคำขอตรวจสอบวุฒิ'
         ) ? (
           <div className='flex gap-x-4 absolute right-6 top-6'>
-            <button
-              onClick={() => hook.changeStatus(StatusLogData.managerNoAppove)}
-              className=' p-4 bg-red-500 text-white rounded-md'
-            >
-              ไม่อนุมัติ
-            </button>
-            <button
-              onClick={() => hook.changeStatus(StatusLogData.managerAppove)}
-              className='  p-4 bg-blue-500 text-white rounded-md'
-            >
-              อนุมัติ
-            </button>
+            {hook.buttonLoading ? (
+              <div style={{ width: 100 }}>
+                <mwc-circular-progress Indeterminate></mwc-circular-progress>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={() => hook.changeStatus(StatusLogData.managerNoAppove)}
+                  className=' p-4 bg-red-500 text-white rounded-md'
+                >
+                  ไม่อนุมัติ
+                </button>
+                <button
+                  onClick={() => hook.changeStatus(StatusLogData.managerAppove)}
+                  className='  p-4 bg-blue-500 text-white rounded-md'
+                >
+                  อนุมัติ
+                </button>
+              </>
+            )}
           </div>
         ) : null}
 
@@ -131,7 +139,7 @@ const RequestDoc: React.FC = () => {
         ) : null}
 
         <div
-          style={{ maxWidth: 588 }}
+          style={{ maxWidth: 680 }}
           className='p-12 px-18 bg-white shadow-xl rounded-xl flex flex-col gap-y-8'
         >
           <div className=' text-2xl font-semibold text-indigo-900 text-center'>
