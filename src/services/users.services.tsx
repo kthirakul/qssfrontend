@@ -58,6 +58,10 @@ const UsersServices = () => {
         case 'eqs_registration@gmail.com':
           window.location.href = '/find-list'
           break
+
+        case 'eqs_registrar@gmail.com':
+          window.location.href = '/checked-list'
+          break
         default:
           break
       }

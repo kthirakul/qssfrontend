@@ -59,9 +59,9 @@ input[type='number'] {
 .line-timeline {
   width: 4px;
   background: #dcd5ee;
-  height: 76px;
+  height: 88px;
   position: absolute;
-  left: 89px;
+  left: 99px;
   top: 15px;
 }
 

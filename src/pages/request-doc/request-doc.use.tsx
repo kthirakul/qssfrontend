@@ -1,13 +1,36 @@
 import { DialogBase } from '@material/mwc-dialog/mwc-dialog-base'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Services } from '../../app.services'
-import { StatusLog, StatusLogData } from '../../interfaces'
+import { ResultData, StatusLog, StatusLogData, StudentData } from '../../interfaces'
 const useRequestDoc = () => {
   const navigate = useNavigate()
   const services = Services()
 
+  const [currentStudent, setcurrentStudent] = useState<StudentData | null>(null)
+
+  const [buttonLoading, setbuttonLoading] = useState(false)
+
+  const [actionStudent, setActionStudent] = useState<'more-detail' | 'add-detail' | null>(null)
+
+  const faculty = useRef<HTMLInputElement>(null)
+  const edu_bg = useRef<HTMLInputElement>(null)
+  const field = useRef<HTMLInputElement>(null)
+  const birthDate = useRef<HTMLInputElement>(null)
+  const gradDate = useRef<HTMLInputElement>(null)
+  const grade = useRef<HTMLInputElement>(null)
+
+  const resultNumberRef = useRef<HTMLInputElement>(null)
+  const resultDetailRef = useRef<HTMLTextAreaElement>(null)
+
+  const [alignment, setAlignment] = useState('')
+
+  const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
+    setAlignment(newAlignment)
+  }
+
   const dialogRef = useRef<DialogBase | null>(null)
+  const dialogResultRef = useRef<DialogBase | null>(null)
   const cencelDoc = () => {
     const status: StatusLog[] | undefined = services.docs.currentRequestDoc?.statusLog
       .concat({
@@ -26,15 +49,30 @@ const useRequestDoc = () => {
     services.docs.setCurrentRequestDoc(newData)
   }
 
-  const findDoc = () => {
+  const findDoc = (student: StudentData, action: 'more-detail' | 'add-detail') => {
+    setActionStudent(action)
+    setcurrentStudent(student)
     dialogRef.current?.show()
+
+    console.log('student', student)
+    // @ts-ignore
+    faculty.current.value = student?.studentDetail?.faculty || ''
+    // @ts-ignore
+    edu_bg.current.value = student?.studentDetail?.edu_bg || ''
+    // @ts-ignore
+    field.current.value = student?.studentDetail?.field || ''
+    // @ts-ignore
+    birthDate.current.value = student?.studentDetail?.birthDate || ''
+    // @ts-ignore
+    gradDate.current.value = student?.studentDetail?.gradDate || ''
+    // @ts-ignore
+    grade.current.value = student?.studentDetail?.grade || ''
+
+    // @ts-ignore
+    setAlignment(student?.studentDetail?.result || '')
   }
 
   const changeStatus = (statusLog: string) => {
-    console.log(
-      'request-doc.use.js |services.user.currentUser?.name| = ',
-      services.user.currentUser?.name
-    )
     const status: StatusLog[] | undefined = services.docs.currentRequestDoc?.statusLog
       .concat({
         createdAt: Date.now(),
@@ -66,10 +104,66 @@ const useRequestDoc = () => {
         case 'eqs_registration@gmail.com':
           window.location.href = '/find-list'
           break
+
+        case 'eqs_registrar@gmail.com':
+          window.location.href = '/checked-list'
+          break
         default:
           break
       }
     }
+  }
+  const findDocDone = () => {
+    changeStatus(StatusLogData.registrationFinished)
+  }
+
+  const reportResultDoc = () => {
+    const data: ResultData = {
+      resultNumber: resultNumberRef.current?.value,
+      resultDetail: resultDetailRef.current?.value,
+    }
+    const newCurrentRequestDoc = { ...services.docs.currentRequestDoc }
+    newCurrentRequestDoc.resultData = data
+
+    // @ts-ignore
+    services.docs.setCurrentRequestDoc(newCurrentRequestDoc)
+
+    changeStatus(StatusLogData.assistantReported)
+    dialogResultRef.current?.close()
+  }
+
+  const addCheckedData = () => {
+    const data = {
+      faculty: faculty.current?.value,
+      edu_bg: edu_bg.current?.value,
+      field: field.current?.value,
+      birthDate: birthDate.current?.value,
+      gradDate: gradDate.current?.value,
+      grade: grade.current?.value,
+      result: alignment,
+    }
+
+    const newCurrentRequestDoc = { ...services.docs.currentRequestDoc }
+    const studentIndex = newCurrentRequestDoc.studentData?.findIndex(
+      (res) => res.studentId === currentStudent?.studentId
+    )
+
+    // @ts-ignore
+    newCurrentRequestDoc.studentData[studentIndex as number].studentDetail = data
+
+    // @ts-ignore
+    services.docs.setCurrentRequestDoc(newCurrentRequestDoc)
+
+    // @ts-ignore
+    if (newCurrentRequestDoc.statusLog[0].status !== 'กำลังดำเนินการตรวจสอบ') {
+      changeStatus(StatusLogData.registrationProcessing)
+    }
+
+    dialogRef.current?.close()
+  }
+
+  const openSentResultDoc = () => {
+    dialogResultRef.current?.show()
   }
 
   const goBack = () => {
@@ -88,6 +182,26 @@ const useRequestDoc = () => {
     changeStatus,
     findDoc,
     dialogRef,
+    handleChange,
+    alignment,
+    faculty,
+    edu_bg,
+    field,
+    birthDate,
+    gradDate,
+    grade,
+    addCheckedData,
+    currentStudent,
+    setcurrentStudent,
+    findDocDone,
+    openSentResultDoc,
+    dialogResultRef,
+    resultNumberRef,
+    resultDetailRef,
+    reportResultDoc,
+    actionStudent,
+    setActionStudent,
+    buttonLoading,
   }
 }
 

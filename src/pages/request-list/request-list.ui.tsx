@@ -17,6 +17,7 @@ const RequestListUi: React.FC = () => {
                 )
             )
             .map((res1, index) => {
+              console.log('index', index)
               return (
                 <div key={index} className='btn-list' onClick={() => hook.goto(res, res1)}>
                   <div>{res.orgData?.poi}</div>
@@ -27,7 +28,8 @@ const RequestListUi: React.FC = () => {
                     <span className='mr-2'>สร้างเมื่อ</span>
                     {hook.servoces.day.longNameWithTime(
                       res1.statusLog[res1.statusLog.length - 1].createdAt
-                    )}
+                    )}{' '}
+                    น.
                   </div>
                 </div>
               )

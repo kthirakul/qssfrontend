@@ -16,6 +16,7 @@ export interface OrgDoc {
 export interface StudentData {
   studentId: string
   studentName: string
+  studentDetail?: StudentDetail
 }
 
 export interface StatusLog {
@@ -30,6 +31,7 @@ export interface RequestData {
   docNote: string
   studentData: StudentData[]
   statusLog: StatusLog[]
+  resultData?: ResultData
 }
 
 export interface RequestDocData {
@@ -41,6 +43,21 @@ export interface RequestDoc {
   [x: string]: RequestDocData
 }
 
+export interface StudentDetail {
+  faculty: string | undefined
+  edu_bg: string | undefined
+  field: string | undefined
+  birthDate: string | undefined
+  gradDate: string | undefined
+  grade: string | undefined
+  result: string
+}
+
+export interface ResultData {
+  resultNumber: string | undefined
+  resultDetail: string | undefined
+}
+
 export enum StatusLogData {
   sendRequest = 'ส่งคำขอตรวจสอบวุฒิแล้ว',
   cancelRequest = 'ยกเลิกคำขอตรวจสอบวุฒิแล้ว',
@@ -48,4 +65,9 @@ export enum StatusLogData {
   assistantNoAppove = 'ไม่ผ่านการคัดกรอง',
   managerAppove = 'อนุมัติคำขอตรวจสอบวุฒิแล้ว',
   managerNoAppove = 'ไม่อนุมัติคำขอตรวจสอบวุฒิ',
+  registrationProcessing = 'กำลังดำเนินการตรวจสอบ',
+  registrationFinished = 'ตรวจสอบข้อมูลนักศึกษาแล้ว',
+  registrarApprove = 'อนุมัติการตรวจสอบวุฒิแล้ว',
+  registrarNoApprove = 'ไม่อนุมัติการตรวจสอบวุฒิ',
+  assistantReported = 'รายงานผลการตรวจสอบวุฒิแล้ว',
 }

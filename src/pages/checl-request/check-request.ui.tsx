@@ -11,7 +11,7 @@ const CheckRequstUi: React.FC = () => {
 
         <div ref={hook.longdoRef} id='form_div'></div>
         
-        <button className='btn-org flex justify-center mt-12' onClick={hook.getLongdoData}>
+        <button className='btn-org flex justify-center mt-8' onClick={hook.getLongdoData}>
           ถัดไป
         </button>
       </div>

@@ -30,7 +30,8 @@ const ApprovedListUi: React.FC = () => {
                     <span className='mr-2'>สร้างเมื่อ</span>
                     {hook.servoces.day.longNameWithTime(
                       res1.statusLog[res1.statusLog.length - 1].createdAt
-                    )}
+                    )}{' '}
+                    น.
                   </div>
                 </div>
               )
@@ -40,7 +41,7 @@ const ApprovedListUi: React.FC = () => {
     </div>
   ) : (
     <div className='flex w-full h-full justify-center items-center gap-x-2 cursor-pointer'>
-      <div className=' text-2xl font-semibold text-blue-800'>ไม่มีรายการคำขอ</div>
+      <div className=' text-2xl font-semibold text-blue-800'>ไม่มีรายการคำขอที่ผ่านการคัดกรอง</div>
     </div>
   )
 }

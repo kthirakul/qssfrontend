@@ -77,7 +77,7 @@ const CheckRequestDetailUi: React.FC = () => {
               <mwc-circular-progress Indeterminate></mwc-circular-progress>
             </div>
           ) : (
-            <button onClick={hook.saveRequestDoc} className='btn-org flex justify-center mt-12'>
+            <button onClick={hook.saveRequestDoc} className='btn-org flex justify-center'>
               บันทึกคำขอ
             </button>
           )}
@@ -85,7 +85,7 @@ const CheckRequestDetailUi: React.FC = () => {
       </div>
 
       <mwc-dialog ref={hook.dialogRef}>
-        <div style={{ fontFamily: 'Sarabun' }} className='flex flex-col gap-y-4'>
+        <div style={{ fontFamily: 'Sarabun' }} className='flex flex-col gap-y-4 p-2'>
           <div className='flex'>
             <div className=' w-28'>รหัสนักศึกษา</div>
             <input
